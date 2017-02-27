@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang ="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv='cache-control' content='no-cache'>
+  <meta http-equiv='expires' content='0'>
+  <meta http-equiv='pragma' content='no-cache'>
+    <title>Fourier App</title> 
+  <script src="js/script.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+  <div class="top">
+    <h1>Fourier Series Synthesis</h1>
+    <form id="form" autocomplete="off">
+      <fieldset>
+        <legend>Add Wave</legend>
+          <select id="wavetype">
+            <option value="sin">Sin</option>
+            <option value="cos">Cos</option>
+          </select> Input between 1 and 99<br>
+          Input Amplitude:<br>
+          <input id="amp" type="text"><br>
+          Input Harmonic: <br>
+          <input id="freq" type="text"><br>
+          Input phase shift as (x pi)/y:<br>
+          x: <input id="phaseNumerator" type="text" value="0">
+          y: <input id="phaseDenominator" type="text" value="0"><br>
+          <input type="submit" value="Submit">
+      </fieldset>
+    </form>
+  </div>
+  <div class="left">
+    <form id="playsound" autocomplete="off">
+      Input frequency.<br>Must be between<br> 100 and 2000Hz:<br>
+      <input id="userFreq" type="text" value="220"><br>
+      <input type="submit" value="Play Sound">
+    </form>
+    <p>Click to clear:</p>
+    <div id="clearDiv"></div>
+  </div>
+  <div class="main">
+      <canvas id="canv">Browser does not support canvas.</canvas>
+  </div>
+  <footer>
+    <a href="mailto:david.lum91@gmail.com">
+    David.Lum91@gmail.com </a>
+  </footer>
+</body>
+</html>
