@@ -46,6 +46,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     while(div.firstChild) {
       div.removeChild(div.firstChild);
     }
+    ampSum = 0;
+    for (var i = 0; i < modArrSet.length; i++) {
+      ampSum += modArrSet[i][1];
+    }
     for (var i = 0; i < modArrSet.length; i++) {
       var text = Math.round((modArrSet[i][1]/ampSum)*100)/100+" \xD7 "+ modArrSet[i][0]+"("+modArrSet[i][2]+" \xD7 "+"2\u03C0t";
       if (modArrSet[i][3] !== true && modArrSet[i][4] !== true && modArrSet[i][3] !== modArrSet[i][4]) {
@@ -111,6 +115,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   function yArr() {
     animCounter = 0; // start Animation from beginning;
     var yArr = [];
+    signal.length = 0;
     var inc = 2/w;
     var count = 0;
     ampSum = 0;
