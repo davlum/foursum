@@ -3,7 +3,7 @@
 }
 
 .top {
-  position:absolute;
+  position:relative;
   left:0; right:0;
   height: 300px;
   width:1200px;
@@ -12,17 +12,20 @@
 }
 .left{
   resize: none;
+    float: left;
   border: 2px groove threedface;
   border-width:2px;
   padding: 20px;
   margin:10px;
-  position:absolute;
-  left:150; top:310px; bottom: 0;
-  width 200px;
+  position:relative;
+  left:150; top:0; bottom: 0;
+  width 200px; height: 400px;
+    overflow-y: scroll;
 }
 .main{
-  position: absolute;
-  left:500px; top:320px; right:0; bottom:0;
+    float: left;
+  position: relative;
+  left:0; top:20; right:0; bottom:0;
 }
 body{margin:20px
 auto;max-width:1200px;line-height:1.3;font-size:18px;color:#444;padding:0
@@ -51,7 +54,7 @@ footer {
     height: 35px;
     margin: 0px 50px 0px 0px;
     text-align: right;
-    padding: 10px 30px;
     width: 180px;
+    bottom: 0; right 0;
 }
 
