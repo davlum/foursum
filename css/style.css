@@ -11,15 +11,16 @@
   margin-right:auto;
 }
 .left{
-  resize: none;
+    resize: none;
     float: left;
-  border: 2px groove threedface;
-  border-width:2px;
-  padding: 20px;
-  margin:10px;
-  position:relative;
-  left:150; top:0; bottom: 0;
-  width 200px; height: 400px;
+    border: 2px groove threedface;
+    border-width:2px;
+    padding: 20px;
+    margin:10px;
+    position:relative;
+    left:150; top:0; bottom: 0;
+    width: 200px;
+    height: 400px;
     overflow-y: scroll;
 }
 .main{

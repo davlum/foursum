@@ -2,8 +2,9 @@
  * Created by davidlum on 4/4/17.
  */
 document.addEventListener("DOMContentLoaded", function (event) {
+
     var twoPi = Math.PI * 2;
-    var canvas = document.getElementById("canv");
+    var canvas = document.getElementById("canvas");
     var ctx = canvas.getContext("2d");
     canvas.height = h = 400;
     canvas.width = w = 2 * h;
