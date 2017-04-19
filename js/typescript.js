@@ -5,18 +5,18 @@ var twoPi = Math.PI * 2;
 var Waves = (function () {
     function Waves() {
         this.waves = [];
+        this.calcAmpSum = function () {
+            this.ampSum = 0;
+            for (var _i = 0, _a = this.waves; _i < _a.length; _i++) {
+                var wave = _a[_i];
+                this.ampSum += wave.amplitude;
+            }
+            return this.ampSum;
+        };
         var initWave;
         initWave = new Wave();
         this.waves.push(initWave);
     }
-    Waves.prototype.calcAmpSum = function () {
-        this.ampSum = 0;
-        for (var _i = 0, _a = this.waves; _i < _a.length; _i++) {
-            var wave = _a[_i];
-            this.ampSum += wave.amplitude;
-        }
-        return this.ampSum;
-    };
     Waves.prototype.calcY = function (t) {
         var yval = 0;
         var phase;
@@ -189,6 +189,7 @@ var Initializer = (function () {
     };
     // creates the set of buttons to clear individual waveforms
     Initializer.prototype.clearForm = function () {
+        var _this = this;
         while (this.clearDiv.firstChild) {
             this.clearDiv.removeChild(this.clearDiv.firstChild);
         }
@@ -210,9 +211,9 @@ var Initializer = (function () {
             var tnode = document.createTextNode(text);
             newp.appendChild(tnode);
             newp.addEventListener("click", function (event) {
-                this.ws.waves.splice(parseInt(event.target.id), 1);
-                this.clearForm();
-                this.init();
+                _this.ws.waves.splice(parseInt(event.target.id), 1);
+                _this.clearForm();
+                _this.init();
             });
             Idcounter++;
             this.clearDiv.appendChild(newp);
@@ -223,12 +224,13 @@ var Initializer = (function () {
 }());
 var AudioButton = (function () {
     function AudioButton() {
+        var _this = this;
         this.play = document.getElementById("playsound"); // playing the sound
         this.signal = new Signal();
         //button for play Sound with Gain envelope
         this.play.addEventListener("submit", function (event) {
-            if (this.ac !== undefined) {
-                this.ac.close();
+            if (_this.ac !== undefined) {
+                _this.ac.close();
             }
             event.preventDefault();
             var getAndParse = function () {
@@ -238,20 +240,20 @@ var AudioButton = (function () {
                 }
                 return freq;
             };
-            this.freq = getAndParse();
-            var coefs = this.signal.dft();
-            this.ac = new AudioContext();
-            var osc = this.ac.createOscillator();
-            var wave = this.ac.createPeriodicWave(coefs[0], coefs[1]);
+            _this.freq = getAndParse();
+            var coefs = _this.signal.dft();
+            _this.ac = new AudioContext();
+            var osc = _this.ac.createOscillator();
+            var wave = _this.ac.createPeriodicWave(coefs[0], coefs[1]);
             osc.setPeriodicWave(wave);
-            osc.frequency.value = this.freq;
-            var gainNode = this.ac.createGain();
+            osc.frequency.value = _this.freq;
+            var gainNode = _this.ac.createGain();
             osc.connect(gainNode);
-            gainNode.connect(this.ac.destination);
-            gainNode.gain.setValueAtTime(0, this.ac.currentTime);
+            gainNode.connect(_this.ac.destination);
+            gainNode.gain.setValueAtTime(0, _this.ac.currentTime);
             osc.start();
-            gainNode.gain.linearRampToValueAtTime(1, this.ac.currentTime + 0.1);
-            gainNode.gain.linearRampToValueAtTime(0, this.ac.currentTime + 4);
+            gainNode.gain.linearRampToValueAtTime(1, _this.ac.currentTime + 0.1);
+            gainNode.gain.linearRampToValueAtTime(0, _this.ac.currentTime + 4);
             osc.stop(4);
         });
     }

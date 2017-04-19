@@ -15,7 +15,8 @@ class Waves {
         this.waves.push(initWave);
     }
 
-    calcAmpSum() : number {
+    calcAmpSum: () => number =
+        function() {
         this.ampSum = 0;
         for (let wave of this.waves) {
             this.ampSum += wave.amplitude;
@@ -239,7 +240,7 @@ class Initializer {
             newp.id = Idcounter.toString();
             let tnode = document.createTextNode(text);
             newp.appendChild(tnode);
-            newp.addEventListener("click", function(this: Initializer, event: any) {
+            newp.addEventListener("click", (event: any) => {
                 this.ws.waves.splice(parseInt((<HTMLElement>event.target).id), 1);
                 this.clearForm();
                 this.init();
@@ -261,7 +262,7 @@ class AudioButton {
     constructor(){
         this.signal = new Signal();
         //button for play Sound with Gain envelope
-        this.play.addEventListener("submit", function(this: AudioButton, event: any) {
+        this.play.addEventListener("submit", (event: any) => {
             if (this.ac !== undefined) { this.ac.close(); }
             event.preventDefault();
             let getAndParse = function() {
