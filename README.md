@@ -10,7 +10,6 @@ like this; http://treeblurb.com/dev_math/sin_canv00.html.
 Also an array specifically for the dft with higher sampling rate,and a method to sort the waves submitted by the user either by
 amplitude, frequency, or phase. Maybe try to make the page look like it was built sometime after 1995 as well. 
 
-If you would like to run it and have python installed, you can download it, cd into that directory
-and run $ python -m SimpleHTTPServer 8000 and open up localhost:8000 in your web browser. 
+It can be checked out here: https://davlum.github.io/foursum/
 
 contact: david.lum91@gmail.com
