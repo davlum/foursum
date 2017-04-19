@@ -97,11 +97,11 @@ class Wave {
 
         // parseInt returns NaN on zero sometimes.
         // This function kind of deals with that.
-        let getAndParse = function(id: string) : number {
+        let getAndParse = (id: string) : number => {
             let boolOrNum = parseInt($(id).val(), 10) || true;
             if (boolOrNum === true) {
                 return 0;
-            } else {return boolOrNum; }
+            } else { return boolOrNum; }
         };
 
         this.waveType = $("#wavetype").val();
@@ -121,12 +121,12 @@ class Wave {
     }
 
     validateWave() : boolean {
-        let test1 = function(i: number) { return (i < 1 || 1 > 99) };
-        let test2 = function(i: number) { return (i < -99 || i > 99) };
-        return !(test1(this.amplitude) ||
-                 test1(this.frequency) ||
-                 test2(this.phaseDenom) ||
-                 test2(this.phaseNum))
+        let test1 = (i: number): boolean => { return (i < 1 || 1 > 99) };
+        let test2 = (i: number): boolean => { return (i < -99 || i > 99) };
+        return (test1(this.amplitude) ||
+                test1(this.frequency) ||
+                test2(this.phaseDenom) ||
+                test2(this.phaseNum))
     }
 }
 
@@ -214,8 +214,8 @@ class Initializer {
     init() : void {
         this.ws.calcYVals(this.canvas, this.audio.signal);
         clearInterval(this.intervalID);
-        this.intervalID = setInterval(function(){
-            this.canvas.plotWave(this.waves.yvals)
+        this.intervalID = setInterval( () => {
+            this.canvas.plotWave(this.ws.yvals)
         }, 40);
     }
 

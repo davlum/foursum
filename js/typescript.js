@@ -107,7 +107,7 @@ var Wave = (function () {
     Wave.prototype.validateWave = function () {
         var test1 = function (i) { return (i < 1 || 1 > 99); };
         var test2 = function (i) { return (i < -99 || i > 99); };
-        return !(test1(this.amplitude) ||
+        return (test1(this.amplitude) ||
             test1(this.frequency) ||
             test2(this.phaseDenom) ||
             test2(this.phaseNum));
