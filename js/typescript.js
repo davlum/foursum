@@ -158,6 +158,7 @@ var Canvas = (function () {
 }());
 var Initializer = (function () {
     function Initializer() {
+        var _this = this;
         this.clearDiv = document.getElementById("clearDiv");
         this.form = document.getElementById("form"); // the form
         this.ws = new Waves();
@@ -172,9 +173,9 @@ var Initializer = (function () {
                 console.log("bad Inputs.");
             }
             else {
-                this.ws.waves.push(wave);
-                this.clearForm();
-                this.init();
+                _this.ws.waves.push(wave);
+                _this.clearForm();
+                _this.init();
             }
         };
         this.form.addEventListener("submit", addWave, true);

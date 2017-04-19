@@ -194,7 +194,7 @@ class Initializer {
 
         // Adds a waveform to waves[] and then plots it.
         // Does nothing if input is no bueno.
-        let addWave = function(this: Initializer, event: any) {
+        let addWave = (event: any) => {
             event.preventDefault(); // prevents page from reloading automatically
             let wave = new Wave();
 
