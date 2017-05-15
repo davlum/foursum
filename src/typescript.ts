@@ -15,8 +15,7 @@ class Waves {
         this.waves.push(initWave);
     }
 
-    calcAmpSum: () => number =
-        function() {
+    calcAmpSum() : number {
         this.ampSum = 0;
         for (let wave of this.waves) {
             this.ampSum += wave.amplitude;
@@ -25,14 +24,14 @@ class Waves {
     }
 
     calcY(t: number) : number {
-        var yval = 0;
+        let yval = 0;
         let phase: number;
         for (let wave of this.waves) {
             phase = wave.phase * Math.PI;
             if (wave.waveType == "cos") {
                 phase += Math.PI/2;
             }
-            yval += wave.amplitude * Math.sin(wave.frequency * twoPi * t + phase)
+            yval += wave.amplitude * Math.sin(wave.frequency * twoPi * t + phase);
         }
         return yval
     }
@@ -47,8 +46,8 @@ class Waves {
             let y = this.calcY(count);
             count += inc;
             this.yvals.push(y);
-            sig.signal.push(y);
         }
+        sig.signal = this.yvals.slice();
         this.calcAmpSum();
         for (let x = 0; x < 3*canv.width; x++){
             this.yvals[x] = canv.origin - this.yvals[x]/(this.ampSum)*(180);
@@ -68,10 +67,10 @@ class Signal {
         let period = this.signal.length/2;
         let realArr = new Float32Array(period);
         let imagArr = new Float32Array(period);
-        for (var bin = 0; bin < period; bin++) {
+        for (let bin = 0; bin < period; bin++) {
             real = 0;
             imag = 0;
-            for (var n = 0; n < period; n++) {
+            for (let n = 0; n < period; n++) {
                 real += this.signal[n] * Math.cos(-2*Math.PI*n*bin/period);
                 imag += this.signal[n] * Math.sin(-2*Math.PI*n*bin/period);
             }
@@ -110,7 +109,7 @@ class Wave {
         this.phaseNum =  getAndParse("#phaseNumerator");
         this.phaseDenom = getAndParse("#phaseDenominator");
 
-        let check = function() : number {
+        let check = () => {
             if (this.phaseNum === 0 || this.phaseDenom === 0) {
                 return 0; }
             else {
@@ -140,9 +139,10 @@ class Canvas {
     readonly origin: number = this.height/2;
 
     constructor() {
-        this.canvas = document.createElement('canvas');
-        this.canvas.innerHTML = "Browser does not support Canvas";
-        this.ctx = this.canvas.getContext("2d");
+        this.canvas = <HTMLCanvasElement> document.getElementById('canvas');
+        this.ctx = <CanvasRenderingContext2D> this.canvas.getContext("2d");
+        this.canvas.height = this.height;
+        this.canvas.width = this.width;
     }
 
     // Plots the axis.
@@ -166,7 +166,7 @@ class Canvas {
         this.plotGraph();
         this.ctx.beginPath();
         this.ctx.moveTo(0, arr[this.animCounter]);
-        for (var x = 0; x < this.width; x++){
+        for (let x = 0; x < this.width; x++){
             this.ctx.lineTo(x, arr[(x + this.animCounter) % this.width]);
         }
         this.animCounter += 1;
@@ -279,7 +279,7 @@ class AudioButton {
             let wave = this.ac.createPeriodicWave(coefs[0], coefs[1]);
             osc.setPeriodicWave(wave);
             osc.frequency.value = this.freq;
-            var gainNode = this.ac.createGain();
+            let gainNode = this.ac.createGain();
             osc.connect(gainNode);
             gainNode.connect(this.ac.destination);
             gainNode.gain.setValueAtTime(0, this.ac.currentTime);
@@ -292,7 +292,7 @@ class AudioButton {
 }
 
 
-// run this shit
+// run
 $(document).ready(function(){
     let init: Initializer;
     init = new Initializer();

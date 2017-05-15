@@ -7,7 +7,7 @@
   <meta http-equiv='pragma' content='no-cache'>
     <title>Fourier App</title>
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="src/typescript.js"></script>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
@@ -17,13 +17,13 @@
       <fieldset>
         <legend>Add Wave</legend>
           <select id="wavetype">
-            <option value="sin">Sin</option>
+            <option value="sin" selected="selected">Sin</option>
             <option value="cos">Cos</option>
           </select> Input between 1 and 99;<br>
           Input Amplitude:<br>
-          <input id="amp" type="text"><br>
+          <input id="amp" type="text" value="1"><br>
           Input Harmonic: <br>
-          <input id="freq" type="text"><br>
+          <input id="freq" type="text" value="1"><br>
           Input phase shift as (x&#8727&#960)/y:<br>
           x: <input id="phaseNumerator" type="text" value="0">
           y: <input id="phaseDenominator" type="text" value="0"><br>

@@ -5,18 +5,18 @@ var twoPi = Math.PI * 2;
 var Waves = (function () {
     function Waves() {
         this.waves = [];
-        this.calcAmpSum = function () {
-            this.ampSum = 0;
-            for (var _i = 0, _a = this.waves; _i < _a.length; _i++) {
-                var wave = _a[_i];
-                this.ampSum += wave.amplitude;
-            }
-            return this.ampSum;
-        };
         var initWave;
         initWave = new Wave();
         this.waves.push(initWave);
     }
+    Waves.prototype.calcAmpSum = function () {
+        this.ampSum = 0;
+        for (var _i = 0, _a = this.waves; _i < _a.length; _i++) {
+            var wave = _a[_i];
+            this.ampSum += wave.amplitude;
+        }
+        return this.ampSum;
+    };
     Waves.prototype.calcY = function (t) {
         var yval = 0;
         var phase;
@@ -40,8 +40,8 @@ var Waves = (function () {
             var y = this.calcY(count);
             count += inc;
             this.yvals.push(y);
-            sig.signal.push(y);
         }
+        sig.signal = this.yvals.slice();
         this.calcAmpSum();
         for (var x = 0; x < 3 * canv.width; x++) {
             this.yvals[x] = canv.origin - this.yvals[x] / (this.ampSum) * (180);
@@ -78,6 +78,7 @@ var Signal = (function () {
 }());
 var Wave = (function () {
     function Wave() {
+        var _this = this;
         // parseInt returns NaN on zero sometimes.
         // This function kind of deals with that.
         var getAndParse = function (id) {
@@ -95,11 +96,11 @@ var Wave = (function () {
         this.phaseNum = getAndParse("#phaseNumerator");
         this.phaseDenom = getAndParse("#phaseDenominator");
         var check = function () {
-            if (this.phaseNum === 0 || this.phaseDenom === 0) {
+            if (_this.phaseNum === 0 || _this.phaseDenom === 0) {
                 return 0;
             }
             else {
-                return this.phaseNum / this.phaseDenom;
+                return _this.phaseNum / _this.phaseDenom;
             }
         };
         this.phase = check();
@@ -120,9 +121,10 @@ var Canvas = (function () {
         this.height = 400;
         this.width = this.height * 2;
         this.origin = this.height / 2;
-        this.canvas = document.createElement('canvas');
-        this.canvas.innerHTML = "Browser does not support Canvas";
+        this.canvas = document.getElementById('canvas');
         this.ctx = this.canvas.getContext("2d");
+        this.canvas.height = this.height;
+        this.canvas.width = this.width;
     }
     // Plots the axis.
     Canvas.prototype.plotGraph = function () {
@@ -182,10 +184,11 @@ var Initializer = (function () {
     }
     // starts the animation
     Initializer.prototype.init = function () {
+        var _this = this;
         this.ws.calcYVals(this.canvas, this.audio.signal);
         clearInterval(this.intervalID);
         this.intervalID = setInterval(function () {
-            this.canvas.plotWave(this.waves.yvals);
+            _this.canvas.plotWave(_this.ws.yvals);
         }, 40);
     };
     // creates the set of buttons to clear individual waveforms
@@ -260,7 +263,7 @@ var AudioButton = (function () {
     }
     return AudioButton;
 }());
-// run this shit
+// run
 $(document).ready(function () {
     var init;
     init = new Initializer();
