@@ -11,5 +11,3 @@ Also an array specifically for the dft with higher sampling rate,and a method to
 amplitude, frequency, or phase. Maybe try to make the page look like it was built sometime after 1995 as well. 
 
 It can be checked out here: https://davlum.github.io/foursum/
-
-contact: david.lum91@gmail.com
